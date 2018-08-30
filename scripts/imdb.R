@@ -11,11 +11,12 @@ get_page <- function(type) {
 
   page %>%
     html_table(TRUE, TRUE, TRUE) %>%
-    {.[[1]][1:100, 2:3]} %>%
+    {.[[1]][, 2:3]} %>%
     set_names(c("title", "rating")) %>%
-    mutate(title        = str_extract(title, "(?<=\\\n).*(?=\\\n)"),
+    mutate(title        = str_trim(str_extract(title, "(?<=\\\n).*(?=\\\n)")),
            movie_rating = type,
-           id           = get_id(page))
+           id           = get_id(page)) %>%
+    slice(1:100)
 }
 
 df <- map_dfr(c("bottom", "top"), get_page)

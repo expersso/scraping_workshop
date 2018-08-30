@@ -1,7 +1,6 @@
 library(tidyverse)
 library(rvest)
 library(httr)
-library(stringr)
 
 # Countries
 countries <-
