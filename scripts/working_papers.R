@@ -1,8 +1,5 @@
 library(tidyverse)
 library(rvest)
-library(lubridate)
-
-page <- read_html("http://www.ecb.europa.eu/pub/research/working-papers/html/all-papers.en.html")
 
 get_title <- . %>%
   html_nodes("dl dd > .doc-title") %>%
@@ -25,6 +22,9 @@ get_id <- . %>%
   html_attr("id") %>%
   str_replace("paper-", "")
 
+# IO
+page <- read_html("http://www.ecb.europa.eu/pub/research/working-papers/html/all-papers.en.html")
+
 papers <- page %>%
   {data_frame(
     id     = get_id(.),
@@ -44,3 +44,19 @@ papers <- papers %>%
   ) %>%
   select(-author) %>%
   unnest()
+
+df <- papers %>%
+  select(id, author = author_url) %>%
+  mutate(author = str_replace_all(author, "^.*/|\\..*$", ""))
+
+tbl <- table(df)
+adj_mat <- t(tbl) %*% tbl
+ta <- rowSums(adj_mat) %>% order(decreasing = TRUE) %>% head(30)
+
+net <- graph_from_adjacency_matrix(adj_mat[ta, ta], "undirected", TRUE, FALSE)
+
+ggraph(net) +
+  geom_edge_link(aes(width = weight), alpha = 0.5) +
+  geom_node_point(size = 8, colour = "steelblue", alpha = 0.5) +
+  geom_node_text(aes(label = name)) +
+  ggforce::theme_no_axes()
