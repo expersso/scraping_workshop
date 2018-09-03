@@ -70,7 +70,7 @@ R](http://adv-r.had.co.nz/) is the best resource I know for learning these.
 
 10. We didn't have time to talk about web forms (such as how to scrape a website
 that first requires you to log in). The short answer for how to do this is to
-use the `html_forms` function in `rvest`. You can take at [this
+use the `html_forms` function in `rvest`. You can take a look at [this
 page](https://scrapethissite.com/pages/advanced/?gotcha=login) for an exercise,
 and see my solution at the bottom of the `scripts/scrapethis.R` file in the
 Github repo.
