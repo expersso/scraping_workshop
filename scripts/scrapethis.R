@@ -57,3 +57,16 @@ s <- submit_form(s, form)
 
 parse_response(s$response)
 
+# Login with CSRF
+s <- html_session("https://scrapethissite.com/pages/advanced/?gotcha=csrf")
+
+csrf_val <- s %>%
+  html_nodes("input[type='hidden']") %>%
+  html_attr("value")
+
+form <- html_form(s)[[1]] %>%
+  set_values(user = "username", pass = "password", csrf = csrf_val) %>%
+  update_list(url = "")
+s <- submit_form(s, form)
+
+parse_response(s$response)
