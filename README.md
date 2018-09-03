@@ -63,7 +63,7 @@ found for learning the syntax of CSS selectors. Highly recommended!
 9. I didn't spend much time explaining how `lapply` and `map` really work, and
 how these functions allow you to avoid writing explicit loops. In my view, these
 functions (and their siblings in the `purrr` package) are some of the most
-powerful functions in the entire R language, so I would strongly advice you to
+powerful functions in the entire R language, so I would strongly advise you to
 spend some time trying to understand and get comfortable using them. The
 [Functionals](http://adv-r.had.co.nz/Functionals.html) chapter in [Advanced
 R](http://adv-r.had.co.nz/) is the best resource I know for learning these.
