@@ -22,15 +22,18 @@ workshop](http://www.eea-esem-congresses.org/index.php?sezn=7&page=137) at the
     use `html_attr(node, attribute)`, e.g. `html_attr(node, "href")` to extract
     the  `href` from an anchor (\<a\>) node.
 
-2. If you're lucky enough to have the data in a <table> node, try `html_table(page)`.
+2. If you're lucky enough to have the data in a \<table\> node, try `html_table(page)`.
     * Remember that this returns a list of dataframes, even if there's only one
     table on the page.
 
 3. If your data is spread across multiple pages, write a function that extracts
-the data for one page, then map that function over all the other pages. E.g.
-    * get_data_for_specific_year <- function(year) { ... }
-    * years <- 2010:2016
-    * all_data <- map_dfr(years, get_data_for_specific_year)
+the data for one page, then map that function over all the other pages. For example, 
+
+```r
+get_data_for_specific_year <- function(year) { ... }
+years <- 2010:2016
+all_data <- map_dfr(years, get_data_for_specific_year)
+```
 
 4. Before you start scraping, kick the tires of the website a bit first.
     * Remember how we changed the `per_page` query to 600 instead of the
