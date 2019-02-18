@@ -15,6 +15,14 @@ countries <-
   mutate_all(html_text, TRUE) %>%
   mutate_at(3:4, as.numeric)
 
+# Countries 2
+page <- read_html("https://scrapethissite.com/pages/simple/")
+
+c("name", "capital", "population", "area") %>%
+  set_names(.) %>%
+  map_dfc(~html_text(html_nodes(page, paste0(".country-", .x)), TRUE)) %>%
+  mutate_at(3:4, as.numeric)
+
 # Hockey teams
 hockey <- "https://scrapethissite.com/pages/forms/?per_page=1000" %>%
   read_html() %>%
