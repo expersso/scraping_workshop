@@ -1,5 +1,7 @@
 library(tidyverse)
 library(rvest)
+library(igraph)
+library(ggraph)
 
 get_title <- . %>%
   html_nodes("dl dd > .doc-title") %>%
