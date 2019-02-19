@@ -35,7 +35,7 @@ links <- laureates %>%
   html_nodes("table.wikitable a") %>%
   head(-6) %>%
   tail(-6) %>%
-  {data_frame(
+  {tibble(
     name = str_trim(html_text(.)),
     uri = paste0("https://en.wikipedia.org", html_attr(., "href"))
   )}

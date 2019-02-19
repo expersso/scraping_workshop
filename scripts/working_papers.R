@@ -28,7 +28,7 @@ get_id <- . %>%
 page <- read_html("http://www.ecb.europa.eu/pub/research/working-papers/html/all-papers.en.html")
 
 papers <- page %>%
-  {data_frame(
+  {tibble(
     id     = get_id(.),
     date   = get_date(.),
     author = get_authors(.),

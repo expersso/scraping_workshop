@@ -27,7 +27,7 @@ get_url <- . %>%
   {paste0("http://www.ecb.europa.eu", .)}
 
 get_metadata <- function(page) {
-  data_frame(
+  tibble(
     date     = get_date(page),
     title    = get_title(page),
     subtitle = get_subtitle(page),

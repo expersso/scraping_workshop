@@ -6,7 +6,7 @@ library(httr)
 countries <-
   "https://scrapethissite.com/pages/simple/" %>%
   read_html() %>%
-  {data_frame(
+  {tibble(
       name       = html_nodes(., ".country-name"),
       capital    = html_nodes(., ".country-capital"),
       population = html_nodes(., ".country-population"),
@@ -34,7 +34,7 @@ get_year <- function(year) {
   paste0("https://scrapethissite.com/pages/ajax-javascript/?ajax=true&year=", year) %>%
   GET() %>%
   content() %>%
-  map_dfr(as_data_frame) %>%
+  map_dfr(as_tibble) %>%
   mutate(title = str_trim(title))
 }
 

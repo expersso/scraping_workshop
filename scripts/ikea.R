@@ -12,14 +12,14 @@ get_categories <- function() {
   "https://www.ikea.com/de/catalog/allproducts/alphabetical/" %>%
     read_html() %>%
     html_nodes("#allProductsContainer li a") %>%
-    {data_frame(
+    {tibble(
       product_category = html_text(., TRUE),
       uri = paste0("https://www.ikea.com", html_attr(., "href"))
     )}
 }
 
 get_product_details <- . %>%
-  {data_frame(
+  {tibble(
     product_title = html_nodes(., ".productTitle:not(:empty)"),
     product_desc = html_nodes(., ".productDesp:not(:empty)"),
     price = html_nodes(., ".price.regularPrice:not(:empty), .prodPrice:not(:empty)")
